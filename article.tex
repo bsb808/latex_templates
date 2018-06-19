@@ -9,53 +9,56 @@
 % Draft - single column style
 \documentclass[11pt,draftcls,journal,onecolumn]{../latexlib/latex_ieee/IEEEtran}
 
-% If the IEEEtran.cls has not been installed into the LaTeX system files, 
-% manually specify the path to it:
-% \documentclass[conference]{../sty/IEEEtran} 
 
-% Gives LaTeX2e the abilsity to do double column
-%% correct bad hyphenation here
-\hyphenation{op-tical net-works semi-conduc-tor IEEEtran}
+\usepackage{indentfirst}
 
 % From thesis main (bbing)
-\usepackage{amssymb,longtable,dcolumn}
-
-% to use pdflatex
-% Standard bbing packages
-\usepackage{cite}      % Written by Donald Arseneau
-\usepackage{graphicx}  % Written by David Carlisle and Sebastian Rahtz
-\usepackage{url}       % Written by Donald Arseneau
+\usepackage{times}
+\usepackage{pdfpages}
+\usepackage{fullpage}
+%\usepackage{hyperref}  % Seems to break things
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+%\usepackage{enumitem} % also breaks things
+\usepackage{cite}     
+\usepackage{graphicx} 
+\usepackage{url}      
 \usepackage{amssymb,longtable,dcolumn}
 \usepackage{bm}
 %\usepackage{subfigure}
 %\usepackage{stfloats}  % Written by Sigitas Tolusis
+\usepackage{subcaption}
 \usepackage[caption=false,font=footnotesize]{subfig}
 %\usepackage{fixltx2e}
 \usepackage{colortbl}
 \usepackage{multirow}
 \usepackage{amsmath}
 \usepackage{units}
-\usepackage{../latexlib/latex_cmds/math_bbing}
 \usepackage{acronym}
 \usepackage{csvsimple}
-\usepackage{../latexlib/latex_cmds/my_acronyms}
 \usepackage{color,soul}
 \DeclareRobustCommand{\hlr}[1]{{\sethlcolor{red}\hl{#1}}}
 \DeclareRobustCommand{\hlg}[1]{{\sethlcolor{green}\hl{#1}}}
 \DeclareRobustCommand{\hlb}[1]{{\sethlcolor{blue}\hl{#1}}}
 \DeclareRobustCommand{\hly}[1]{{\sethlcolor{yellow}\hl{#1}}}
 
+\usepackage{./latex_cmds/math_bbing}
+\usepackage{./latex_cmds/my_acronyms}
+
+\newenvironment{xitemize}{\begin{itemize}\addtolength{\itemsep}{-0.75em}}{\end{itemize}}
+\newenvironment{tasklist}{\begin{enumerate}[label=\textbf{\thesubsubsection-\arabic*},ref=\thesubsubsection-\arabic*,leftmargin=*]}{\end{enumerate}}
+\newcommand\todo[1]{{\bf TODO: #1}}
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{4}
+
+
 \begin{document}
 
 \newtheorem{remark}{Remark}
 \renewcommand{\theremark}{\unskip}
 
-
-\input{../latexlib/latex_cmds/Commands}  % shortcuts to thesis stuff
-\input{../latexlib/latex_cmds/defs}
-%\include{./latex_cmds/Commands}  % shortcuts to thesis stuff
-%\include{./latex_cmds/defs}
-
+\include{./latex_cmds/Commands}  % shortcuts to thesis stuff
+\include{./latex_cmds/defs}
 
 % set the figure default size
 \newcommand{\SF}{0.2}
@@ -158,14 +161,64 @@ Equivalently we can express the same model in non-matrix form, where the speed e
 
 \hl{What/Why is the quadratic yaw drag expressed as $N_{v|v|}|v|v$?  Seems like it would be $N_{r|r|}|r|r$.}
 
-That is all.
+
+\section{Graphics Examples}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\textwidth]{example.png}
+  \caption{System architecture of the Gazebo robot simulator.}
+  \label{fig:gazebo-arch}
+\end{figure}
+
+
+
+\begin{figure}[h]
+  \centering
+  \begin{subfigure}[t]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{example.png}
+    \caption{The Boston Dynamics Atlas humanoid robot simulated in Gazebo for
+             the DARPA Robotics Challenge (DRC)}
+  \end{subfigure}
+  ~
+  \begin{subfigure}[t]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{example.png}
+    \caption{The NASA R5 humanoid robot simulated in Gazebo for the Space
+             Robotics Challenge (SRC)}
+  \end{subfigure}
+  ~
+  \begin{subfigure}[t]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{example.png}
+    \caption{The Johns Hopkins prosthetic limb simulated in Gazebo for the
+             DARPA HAPTIX program.}
+  \end{subfigure}\\
+  ~
+  \begin{subfigure}[t]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{example.png}
+    \caption{An industrial robot simulated for the NIST ARIAC program.}
+  \end{subfigure}
+  ~
+  \begin{subfigure}[t]{0.3\textwidth}
+    \includegraphics[width=\textwidth]{example.png}
+    \caption{A large swarm of unmanned aerial vehicles (UAVs) simulated in
+             Gazebo for the DARPA SASC program.}
+  \end{subfigure}
+  ~
+  \caption{Examples of Gazebo used to simulate a variety of robots in
+           government-sponsored research \& development programs.}
+  \label{fig:gazebo_examples}
+\end{figure}
+
+\clearpage
+
+That's all folks...
 
 % standard IEEE bibliography style from:
 % http://www.ctan.org/tex-archive/macros/latex/contrib/supported/IEEEtran/bibtex
-%\bibliographystyle{../latex_ieee/IEEEtran}
-\bibliographystyle{apalike}
+\bibliographystyle{./ieee/IEEEtran}
+%\bibliographystyle{apalike}
 % argument is your BibTeX string definitions and bibliography database(s)
-\bibliography{../bibtexdatabase/bbing_master}
+\bibliography{./bibtex/bbing_master}
 %\bibliography{./latex_ieee/IEEEabrv}
 
 % if you will not have a photo at all:
